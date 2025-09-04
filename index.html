@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fitness Plug - Premium Protein Bars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-black: #000000;
+            --text-dark: #1a1a1a;
+            --text-medium: #666666;
+            --text-light: #999999;
+            --white: #ffffff;
+            --light-gray: #f8f8f8;
+            --border-light: #e5e5e5;
+            --accent-color: #ff6b35;
+        }
+
+        [data-theme="dark"] {
+            --primary-black: #ffffff;
+            --text-dark: #e5e5e5;
+            --text-medium: #b3b3b3;
+            --text-light: #888888;
+            --white: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --border-light: #333333;
+            --accent-color: #ff6b35;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-family: inherit;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: var(--primary-black);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--text-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-black);
+            border: 1px solid var(--primary-black);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-black);
+            color: var(--white);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-light {
+            background: var(--light-gray);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
+        p {
+            font-size: 16px;
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--light-gray);
+            color: var(--primary-black);
+            border-color: var(--primary-black);
+        }
+
+        .nav-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-icon:hover {
+            background: var(--light-gray);
+            color: var(--primary-black);
+        }
+
+        .nav-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .hamburger-menu {
+            position: relative;
+        }
+
+        .hamburger-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            gap: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-icon:hover {
+            background: var(--light-gray);
+        }
+
+        .hamburger-line {
+            width: 20px;
+            height: 2px;
+            background: var(--text-medium);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            margin-top: 10px;
+        }
+
+        .hamburger-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .hamburger-dropdown a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hamburger-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .hamburger-dropdown a:hover {
+            background: var(--light-gray);
+            color: var(--primary-black);
+        }
+        
+        .nav-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-black);
+        }
+        
+        .hero {
+            padding-top: 80px;
+            background: var(--white);
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            overflow: hidden;
+            border-radius: 0;
+        }
+        
+        .carousel-slides {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            width: 20%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: var(--white);
+            transform: scale(1.2);
+        }
+        
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-arrows:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        .hero-content {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero-content .container {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .nav-content {
+                gap: 1rem;
+            }
+            
+            .nav-logo {
+                font-size: 1.2rem;
+                position: static;
+                transform: none;
+                order: 2;
+                flex: 1;
+                text-align: center;
+            }
+            
+            .hamburger-menu {
+                order: 1;
+            }
+            
+            .nav-right {
+                order: 3;
+                margin-left: 0;
+                gap: 0.5rem;
+            }
+            
+            .nav-icon, .theme-toggle {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .nav-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .theme-toggle {
+                font-size: 16px;
+            }
+            
+            .hamburger-dropdown {
+                min-width: 180px;
+                left: -10px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                padding: 14px 25px;
+            }
+            
+            .carousel-container {
+                height: 45vh;
+                min-height: 280px;
+            }
+            
+            .carousel-arrows {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .carousel-prev {
+                left: 8px;
+            }
+            
+            .carousel-next {
+                right: 8px;
+            }
+            
+            /* India's Real Protein Bar Section Mobile */
+            .grid.grid-2 {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            .grid.grid-2 > div:first-child {
+                order: 2;
+            }
+            
+            .grid.grid-2 > div:last-child {
+                order: 1;
+                padding-left: 0 !important;
+                text-align: center;
+            }
+            
+            .grid.grid-2 h2 {
+                font-size: clamp(2rem, 8vw, 3rem) !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .grid.grid-2 p {
+                font-size: 16px !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .grid.grid-2 > div:last-child > div {
+                flex-direction: column !important;
+                gap: 1.5rem !important;
+                margin-top: 2rem !important;
+                text-align: left;
+            }
+            
+            /* Product Section Mobile */
+            .grid.grid-3 {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            /* Stats Grid Mobile */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
+                margin: 2rem 0 !important;
+            }
+            
+            .stat-item {
+                padding: 0.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem !important;
+            }
+            
+            /* Nutrition Section Mobile */
+            #nutrition .grid.grid-2 {
+                gap: 3rem !important;
+            }
+            
+            #nutrition .grid.grid-2 > div:first-child {
+                order: 1;
+            }
+            
+            #nutrition .grid.grid-2 > div:last-child {
+                order: 2;
+            }
+            
+            /* Footer Mobile */
+            footer .grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+                text-align: center;
+            }
+            
+            footer .grid > div:first-child {
+                margin-bottom: 1rem;
+            }
+            
+            /* CTA Section Mobile */
+            .section.section-light h2 {
+                font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+            }
+            
+            .section.section-light > .container > div {
+                flex-direction: column !important;
+                gap: 1rem !important;
+            }
+            
+            .section.section-light .btn {
+                padding: 12px 30px !important;
+                font-size: 13px !important;
+            }
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="hamburger-menu">
+                    <button class="hamburger-icon" id="hamburgerToggle">
+                        <div class="hamburger-line"></div>
+                        <div class="hamburger-line"></div>
+                        <div class="hamburger-line"></div>
+                    </button>
+                    <div class="hamburger-dropdown" id="hamburgerDropdown">
+                        <a href="#about">About</a>
+                        <a href="#products">Products</a>
+                        <a href="#nutrition">Nutrition</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#nutrition">Nutrition</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#" class="nav-logo">THE FITNESS PLUG</a>
+                <div class="nav-right">
+                    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+                        🌙
+                    </button>
+                    <button class="nav-icon" title="Profile">
+                        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.00002 21.8174C4.6026 22 5.41649 22 6.8 22H17.2C18.5835 22 19.3974 22 20 21.8174M4.00002 21.8174C3.87082 21.7783 3.75133 21.7308 3.63803 21.673C3.07354 21.3854 2.6146 20.9265 2.32698 20.362C2 19.7202 2 18.8802 2 17.2V6.8C2 5.11984 2 4.27976 2.32698 3.63803C2.6146 3.07354 3.07354 2.6146 3.63803 2.32698C4.27976 2 5.11984 2 6.8 2H17.2C18.8802 2 19.7202 2 20.362 2.32698C20.9265 2.6146 21.3854 3.07354 21.673 3.63803C22 4.27976 22 5.11984 22 6.8V17.2C22 18.8802 22 19.7202 21.673 20.362C21.3854 20.9265 20.9265 21.3854 20.362 21.673C20.2487 21.7308 20.1292 21.7783 20 21.8174M4.00002 21.8174C4.00035 21.0081 4.00521 20.5799 4.07686 20.2196C4.39249 18.6329 5.63288 17.3925 7.21964 17.0769C7.60603 17 8.07069 17 9 17H15C15.9293 17 16.394 17 16.7804 17.0769C18.3671 17.3925 19.6075 18.6329 19.9231 20.2196C19.9948 20.5799 19.9996 21.0081 20 21.8174M16 9.5C16 11.7091 14.2091 13.5 12 13.5C9.79086 13.5 8 11.7091 8 9.5C8 7.29086 9.79086 5.5 12 5.5C14.2091 5.5 16 7.29086 16 9.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="nav-icon" title="Shopping Bag">
+                        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.0004 9V6C16.0004 3.79086 14.2095 2 12.0004 2C9.79123 2 8.00037 3.79086 8.00037 6V9M3.59237 10.352L2.99237 16.752C2.82178 18.5717 2.73648 19.4815 3.03842 20.1843C3.30367 20.8016 3.76849 21.3121 4.35839 21.6338C5.0299 22 5.94374 22 7.77142 22H16.2293C18.057 22 18.9708 22 19.6423 21.6338C20.2322 21.3121 20.6971 20.8016 20.9623 20.1843C21.2643 19.4815 21.179 18.5717 21.0084 16.752L20.4084 10.352C20.2643 8.81535 20.1923 8.04704 19.8467 7.46616C19.5424 6.95458 19.0927 6.54511 18.555 6.28984C17.9444 6 17.1727 6 15.6293 6L8.37142 6C6.82806 6 6.05638 6 5.44579 6.28984C4.90803 6.54511 4.45838 6.95458 4.15403 7.46616C3.80846 8.04704 3.73643 8.81534 3.59237 10.352Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Carousel -->
+        <div class="carousel-container">
+            <div class="carousel-slides" id="carouselSlides">
+                <div class="carousel-slide">
+                    <img src="hero_image.png" alt="Premium Protein Bar 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Premium Protein Bar 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Premium Protein Bar 3">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Premium Protein Bar 4">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Premium Protein Bar 5">
+                </div>
+            </div>
+            
+            <!-- Navigation Arrows -->
+            <button class="carousel-arrows carousel-prev" onclick="changeSlide(-1)">‹</button>
+            <button class="carousel-arrows carousel-next" onclick="changeSlide(1)">›</button>
+            
+            <!-- Dots Navigation -->
+            <div class="carousel-nav">
+                <div class="carousel-dot active" onclick="currentSlide(1)"></div>
+                <div class="carousel-dot" onclick="currentSlide(2)"></div>
+                <div class="carousel-dot" onclick="currentSlide(3)"></div>
+                <div class="carousel-dot" onclick="currentSlide(4)"></div>
+                <div class="carousel-dot" onclick="currentSlide(5)"></div>
+            </div>
+        </div>
+        
+        <!-- Hero Content Below Carousel -->
+        <div class="hero-content">
+            <div class="container">
+                <h1>Premium Protein Perfection</h1>
+                <p>Crafted for those who demand excellence. The Fitness Plug protein bars deliver uncompromising quality with every bite.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Shop Now</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Grid -->
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">25g</span>
+                    <span class="stat-label">Protein</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">280</span>
+                    <span class="stat-label">Calories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3g</span>
+                    <span class="stat-label">Sugar</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8g</span>
+                    <span class="stat-label">Fiber</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- India's Real Protein Bar Section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2" style="align-items: center; gap: 4rem;">
+                <div>
+                    <img src="hero_image.png" alt="India's Real Protein Bar" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                </div>
+                <div style="padding-left: 3rem;">
+                    <h2 style="color: var(--primary-black); margin-bottom: 2rem; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800;">India's Real Protein Bar</h2>
+                    <p style="font-size: 18px; line-height: 1.7; margin-bottom: 2rem;">
+                        Crafted with authentic Indian ingredients and international quality standards, The Fitness Plug represents the perfect fusion of tradition and innovation. We're not just another protein bar - we're India's answer to premium nutrition.
+                    </p>
+                    <p style="margin-bottom: 2rem;">
+                        Every bar is meticulously formulated using grass-fed whey protein, organic nuts, and natural sweeteners. No artificial preservatives, no shortcuts - just pure, clean nutrition that fuels your ambitions and honors your health.
+                    </p>
+                    <div style="display: flex; gap: 2rem; margin-top: 2.5rem;">
+                        <div>
+                            <h4 style="color: var(--primary-black); margin-bottom: 0.75rem;">🇮🇳 Made in India</h4>
+                            <p style="font-size: 14px; color: var(--text-medium);">Proudly manufactured with local expertise</p>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary-black); margin-bottom: 0.75rem;">🌱 Natural Ingredients</h4>
+                            <p style="font-size: 14px; color: var(--text-medium);">No artificial additives or preservatives</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="products" class="section section-light">
+        <div class="container">
+            <div class="text-center">
+                <h2>Engineered Excellence</h2>
+                <p style="margin-bottom: 4rem;">Every Fitness Plug bar is meticulously crafted with premium ingredients to fuel your ambitions and exceed your expectations.</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+                    <h3>Premium Quality</h3>
+                    <p>Only the finest ingredients make it into our bars. No compromises, no shortcuts.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💪</div>
+                    <h3>25g Protein</h3>
+                    <p>Complete amino acid profile to support your training and recovery goals.</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🌱</div>
+                    <h3>Clean Ingredients</h3>
+                    <p>No artificial fillers, no unnecessary additives. Just pure, clean nutrition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nutrition Section -->
+    <section id="nutrition" class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div>
+                    <h2 style="margin-bottom: 2rem;">Nutrition Facts</h2>
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="font-weight: 600;">Calories</span>
+                            <span style="font-weight: 700;">280</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="font-weight: 600;">Protein</span>
+                            <span style="font-weight: 700; color: var(--primary-black);">25g</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="font-weight: 600;">Carbohydrates</span>
+                            <span style="font-weight: 700;">18g</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="font-weight: 600;">Fat</span>
+                            <span style="font-weight: 700;">12g</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
+                            <span style="font-weight: 600;">Fiber</span>
+                            <span style="font-weight: 700;">8g</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;">
+                            <span style="font-weight: 600;">Sugar</span>
+                            <span style="font-weight: 700;">3g</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Premium Ingredients</h3>
+                    <div style="margin-top: 2rem;">
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 2rem;">
+                            <div style="width: 8px; height: 8px; background: var(--primary-black); border-radius: 50%; margin-right: 1rem; margin-top: 0.5rem; flex-shrink: 0;"></div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Grass-Fed Whey Protein</h4>
+                                <p>Complete amino acid profile for optimal muscle synthesis</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; margin-bottom: 2rem;">
+                            <div style="width: 8px; height: 8px; background: var(--primary-black); border-radius: 50%; margin-right: 1rem; margin-top: 0.5rem; flex-shrink: 0;"></div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Organic Almonds</h4>
+                                <p>Premium nuts for healthy fats and natural crunch</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start;">
+                            <div style="width: 8px; height: 8px; background: var(--primary-black); border-radius: 50%; margin-right: 1rem; margin-top: 0.5rem; flex-shrink: 0;"></div>
+                            <div>
+                                <h4 style="font-weight: 600; margin-bottom: 0.5rem;">Dark Chocolate</h4>
+                                <p>Rich, indulgent flavor with antioxidant benefits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section-light">
+        <div class="container text-center">
+            <h2>Ready to Experience Excellence?</h2>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto 2rem;">Join thousands of athletes and fitness enthusiasts who trust The Fitness Plug for their nutrition needs.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" style="padding: 15px 40px;">Order Now - $39.99</button>
+                <button class="btn btn-secondary" style="padding: 15px 40px;">Subscribe & Save 20%</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" style="background: var(--light-gray); padding: 4rem 0 2rem; border-top: 1px solid var(--border-light);">
+        <div class="container">
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div>
+                    <div class="logo" style="margin-bottom: 1rem;">THE FITNESS PLUG</div>
+                    <p>Premium protein bars for the relentless pursuit of excellence.</p>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--text-dark);">Product</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Nutrition Facts</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Ingredients</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Reviews</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--text-dark);">Company</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">About Us</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Contact</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 600; margin-bottom: 1rem; color: var(--text-dark);">Support</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">FAQ</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Shipping</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="#" style="color: var(--text-medium); text-decoration: none;">Returns</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-light); margin-top: 3rem; padding-top: 2rem; text-align: center; color: var(--text-light);">
+                <p>&copy; 2024 The Fitness Plug. All rights reserved. Premium nutrition for premium performance.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+        
+        // Update toggle button icon based on current theme
+        function updateToggleIcon() {
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        }
+        
+        // Initialize toggle icon
+        updateToggleIcon();
+        
+        // Toggle theme function
+        function toggleTheme() {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleIcon();
+        }
+        
+        // Add event listener to toggle button
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Hamburger menu functionality
+        const hamburgerToggle = document.getElementById('hamburgerToggle');
+        const hamburgerDropdown = document.getElementById('hamburgerDropdown');
+        
+        function toggleHamburgerMenu() {
+            hamburgerDropdown.classList.toggle('active');
+        }
+        
+        // Add event listener to hamburger toggle
+        hamburgerToggle.addEventListener('click', toggleHamburgerMenu);
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburgerToggle.contains(event.target) && !hamburgerDropdown.contains(event.target)) {
+                hamburgerDropdown.classList.remove('active');
+            }
+        });
+
+        // Carousel functionality
+        let currentSlideIndex = 0;
+        const totalSlides = 5;
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            }
+            
+            updateCarousel();
+        }
+
+        function currentSlide(slideIndex) {
+            currentSlideIndex = slideIndex - 1;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const slides = document.getElementById('carouselSlides');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            // Move slides
+            slides.style.transform = `translateX(-${currentSlideIndex * 20}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex);
+            });
+        }
+
+        // Auto-play carousel
+        function autoPlayCarousel() {
+            changeSlide(1);
+        }
+
+        // Start auto-play
+        let autoPlay = setInterval(autoPlayCarousel, 4000);
+
+        // Pause auto-play on hover
+        const carouselContainer = document.querySelector('.carousel-container');
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoPlay);
+        });
+
+        carouselContainer.addEventListener('mouseleave', () => {
+            autoPlay = setInterval(autoPlayCarousel, 4000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Button click handlers
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('Order') || this.textContent.includes('Shop')) {
+                    alert('Thank you for your interest! This is a demo - in a real store, this would take you to checkout.');
+                } else if (this.textContent.includes('Subscribe')) {
+                    alert('Subscription feature coming soon! This is a demo version.');
+                } else if (this.textContent.includes('Learn More')) {
+                    document.querySelector('#products').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97741a0dc660c1a6',t:'MTc1NjU1NDk1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
